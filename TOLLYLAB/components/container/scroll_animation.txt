@@ -1,0 +1,21 @@
+onMounted(() => {
+  const scrollContainer = document.querySelector('.scroll-container');
+
+  function autoScroll() {
+    const scrollWidth = scrollContainer.scrollWidth - scrollContainer.clientWidth;
+    const duration = 5000; // Adjust this value for the total duration of the scroll (5 seconds)
+
+    scrollContainer.scrollBy({
+      left: -scrollWidth / (duration / 16), // Calculate the amount to scroll per frame for right-to-left scrolling
+      behavior: 'smooth'
+    });
+
+    // Loop the scroll when it reaches the beginning
+    if (scrollContainer.scrollLeft <= 0) {
+      scrollContainer.scrollLeft = scrollWidth;
+    }
+  }
+
+  // Adjust the interval to control the speed for smooth scrolling
+  setInterval(autoScroll, 16); // Approximately 60 FPS
+});
